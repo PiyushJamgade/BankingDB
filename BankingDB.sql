@@ -83,3 +83,43 @@ Alter table Transactions modify TransactionID int primary key;
 
 Alter table loans modify LoanID int primary key;
 
+Alter table customers modify customer int primary key;
+
+Alter table branches modify BranchID int primary key;
+
+insert into customers (customer, First_Name, Last_Name, Email, Phone, location, accountcreationdate) values 
+(101,"Piyush","Jamgade","pi@gmail.com",7796255142,"Nagpur","2026-08-11"),
+(102,"Dev","Mishra","dev@gmail.com",5566447788,"mumbai","2025-09-02");
+
+
+select * from customers;
+
+#off the safe mode(off=0, on=1)
+set sql_safe_updates=0;
+
+#clause -where (condition wise)
+update customers set Last_Name = "Saxsena" where customer= 102;
+
+#multiples updates(Case)
+
+update customers set phone =Case 
+when customer =101 then 878862
+when customer =102 then 123456
+end
+where customer in (101,102);
+
+select * from customers;
+
+
+select * from accounts;
+alter table accounts add Customer_id int unique not null;
+
+insert into Accounts (AccountID, Account_type, Balance, Customer_id) value
+(13,"Current","20000",1011);
+
+select * from customers;
+update Accounts set Balance = 20000 where AccountID= 13;
+
+
+#delete query
+Delete from Customers where customer = 101;
