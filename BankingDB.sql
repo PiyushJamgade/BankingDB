@@ -94,6 +94,12 @@ insert into customers (customer, First_Name, Last_Name, Email, Phone, location, 
 
 select * from customers;
 
+insert into Accounts (AccountID, Account_type, Balance, Customer_id) values 
+(110,"Current","100000","1012"),
+(111,"Saving","120000","1013"),
+(112,"Business","150000","1014"),
+(113,"Business","200000","1015");
+
 #off the safe mode(off=0, on=1)
 set sql_safe_updates=0;
 
@@ -123,3 +129,31 @@ update Accounts set Balance = 20000 where AccountID= 13;
 
 #delete query
 Delete from Customers where customer = 101;
+
+select * from Customers
+where Location is not null;
+
+select * from Accounts
+where Account_type = "saving";
+
+select * from Accounts
+where Balance >= 150000;
+
+select * from Accounts
+where Balance between  10000 and 150000;
+
+select * from  customers
+where phone in ("123456");
+
+
+select * from  customers
+Where first_name like "d%";
+
+select * from  customers
+order by first_name;
+
+select * from  Accounts
+order by balance desc;
+
+select * from  Accounts
+order by balance desc limit 2 offset 3;
