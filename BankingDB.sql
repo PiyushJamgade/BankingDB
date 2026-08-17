@@ -157,3 +157,31 @@ order by balance desc;
 
 select * from  Accounts
 order by balance desc limit 2 offset 3;
+
+#Aggregation functionn (min,max,avg,count)
+
+select avg(balance) from accounts;
+
+select * from customers
+where first_name like "a%";
+
+select * from customers
+where email like "%gmail%";
+
+select * from customers
+where last_name like "%a";
+
+select * from customers
+where customer in (102);
+
+
+select * from customers
+order by last_name;
+
+select * from accounts
+order by balance desc limit 2 offset 3;
+
+
+
+
+
