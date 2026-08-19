@@ -87,10 +87,32 @@ Alter table customers modify customer int primary key;
 
 Alter table branches modify BranchID int primary key;
 
+alter table customers rename column customer to customer_id;
+
 insert into customers (customer, First_Name, Last_Name, Email, Phone, location, accountcreationdate) values 
 (101,"Piyush","Jamgade","pi@gmail.com",7796255142,"Nagpur","2026-08-11"),
-(102,"Dev","Mishra","dev@gmail.com",5566447788,"mumbai","2025-09-02");
+(103,"Dev","Mishra","dev@gmail.com",5566447788,"mumbai","2025-09-02");
 
+
+
+
+select * from customers;
+
+insert into customers (customer_id, First_Name, Last_Name, Email, Phone, location, accountcreationdate) values 
+(101,"Piyush","Jamgade","pi@gmail.com",7796255142,"Nagpur","2026-08-11"),
+(102,"Dev","Mishra","dev@gmail.com",5566447788,"mumbai","2025-09-02"),
+(103,"OM","Bhure","omi@gmail.com",8788628432,"Hingna","2024-12-22"),
+(104,"It","Vedant","itvedant@gmail.com",765432190,"Pune","2025-08-30"),
+(105,"Arjit","Singh","arjit@gmail.com",765432190,"Kerela","2025-10-19");
+
+truncate table customers;
+
+insert into customers (customer_id, First_Name, Last_Name, Email, Phone, location, accountcreationdate) values 
+(101,"Piyush","Jamgade","pi@gmail.com",7796255142,"Nagpur","2026-08-11"),
+(102,"Dev","Mishra","dev@gmail.com",5566447788,"mumbai","2025-09-02"),
+(103,"OM","Bhure","omi@gmail.com",8788628432,"Hingna","2024-12-22"),
+(104,"It","Vedant","itvedant@gmail.com",765432190,"Pune","2025-08-30"),
+(105,"Arjit","Singh","arjit@gmail.com",765432190,"Kerela","2025-10-19");
 
 select * from customers;
 
@@ -181,7 +203,69 @@ order by last_name;
 select * from accounts
 order by balance desc limit 2 offset 3;
 
+#upper case
+select *, upper(first_name) from customers;
+
+#lower case
+select *, lower(first_name) as lower from customers;
+
+#length case
+select *, length(first_name) from customers;
+
+#length case
+select *, left(first_name,3) from customers;
+
+#Trim
+select *, trim(first_name) from customers;
+
+#Concat  is used to combine multple columns
+select *, concat(first_name, last_name) from customers;
+
+#Concat_ws   is used to add space
+select *, concat_ws("  ",first_name, last_name) as name from customers;
+
+#left  is used to extract letter from column 
+select *, left(first_name, 2) from customers;
+
+#Right  
+select *, Right(first_name, 2) from customers;
+
+#Mid
+select *, mid(first_name, 3,2) from customers;
+
+#Sub_String
+select *, substring(first_name, 3,2) from customers;
+
+#Replace
+select *, replace(first_name,"Dev","Piyu") from customers;
+
+select *, date_format(AccountCreationDate,"%D-%M-%Y") as Tarik from customers;
+
+select *, date_format(AccountCreationDate,"%y") as Tarik from customers;
+
+select Customer_id , year(D_O_B) as birthyear from customers;
+
+Alter table Customers add column D_O_B Varchar(20);
+
+set sql_safe_updates=0;
+
+update customers set D_O_B=Case 
+when customer_id =101 then "19-10-2004"
+when customer_id =102 then "12-02-2003"
+when customer_id =103 then "01-11-2007"
+when customer_id =104 then "29-05-2010"
+when customer_id =105 then "15-09-2012"
+end
+where customer_id in (101,102,103,104,105);
 
 
 
+select sum(Balance) from Accounts;
+
+select AVg(Balance) as Avg from Accounts;
+
+select Max(Balance) as max from Accounts;
+select Min(Balance) as min from Accounts;
+
+select Count(Customer_id) as min from Accounts;
 
