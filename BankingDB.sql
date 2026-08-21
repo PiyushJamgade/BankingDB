@@ -295,3 +295,88 @@ group by account_type;
 Select account_type, sum(balance) from accounts
 group by account_type
 having  sum(balance) > 30000;
+
+
+insert into customers (customer_id, First_Name, Last_Name, Email, Phone, location, accountcreationdate) values 
+(106,"Nilesh","Kathane","nil@gmail.com",80079305,"Gondia","2026-11-11"),
+(107,"Pranay","Wadibhasme","pranay@gmail.com",3233327352,"Bhandara","2025-09-29");
+
+insert into customers (customer_id, First_Name, Last_Name, Email, Phone, location, accountcreationdate) values 
+(1011,"Kshitij","Rajurkar","Kshi@gmail.com",80079305,"Gondia","2026-11-11"),
+(1012,"Lavish","Rahandale","Lavish@gmail.com",3233327352,"Bhandara","2025-09-29");
+
+select * from customers;
+select * from accounts;
+
+###JOINS
+#Inner join
+select * from customers c
+inner join accounts a
+ON c.customer_id = a.customer_id;
+
+#Left join
+select * from customers c
+Left join accounts a
+ON c.customer_id = a.customer_id;
+
+#Right join
+select * from customers c
+Right join accounts a
+ON c.customer_id = a.customer_id;
+
+
+#full join
+select * from customers c
+left join accounts a
+ON c.customer_id = a.customer_id
+union
+select * from customers c
+Right join accounts a
+ON c.customer_id = a.customer_id;
+
+#Cross Join
+select * from customers cross join accounts;
+
+#Self Join
+
+#Natural Join
+select * from accounts Natural Join Customers;
+
+select * from transactions;
+select * from accounts;
+
+insert into transactions values
+(301,"2025-05-10",200000,"deposite"),
+(302,"2025-03-19",1000000,"Withdraw"),
+(303,"2024-05-10",150000,"deposite"),
+(304,"2023-05-03",250000,"Withdraw");
+
+alter table transactions add account_id int;
+
+update transactions set account_id =Case 
+when transactionID =301 then 13
+when transactionID =302 then 110
+when transactionID =303 then 112
+when transactionID =304 then 113
+end
+where transactionID in (301,302,303,304);
+
+select a.accountid, a.account_type, a.balance, t.transactionid from accounts a
+inner join transactions t
+ON a.accountid = t.customerid;
+
+#Left join
+select * from accounts a
+Left join transactions t
+ON a. accountid = t. transactionid;
+
+select * from accounts a
+inner join transactions t
+ON a. accountID = t. account_id
+where a.balance >10000
+order by a.balance desc;
+
+select * from accounts a
+inner join transactions t
+ON a. accountID = t. account_id
+where t.transaction_type = "withdraw";
