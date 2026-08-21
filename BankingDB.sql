@@ -247,14 +247,14 @@ select Customer_id , year(D_O_B) as birthyear from customers;
 
 Alter table Customers add column D_O_B Varchar(20);
 
-set sql_safe_updates=0;
+set sql_safe_updates=0;                                            
 
 update customers set D_O_B=Case 
-when customer_id =101 then "19-10-2004"
-when customer_id =102 then "12-02-2003"
-when customer_id =103 then "01-11-2007"
-when customer_id =104 then "29-05-2010"
-when customer_id =105 then "15-09-2012"
+when customer_id =101 then "2004-10-19"
+when customer_id =102 then "2003-02-12"
+when customer_id =103 then "2007-11-01"
+when customer_id =104 then "2010-05-29"
+when customer_id =105 then "2012-09-15"
 end
 where customer_id in (101,102,103,104,105);
 
@@ -269,3 +269,29 @@ select Min(Balance) as min from Accounts;
 
 select Count(Customer_id) as min from Accounts;
 
+select * from customers;
+
+SELECT Customer_id, YEAR(D_O_B) AS BirthYear FROM customers;  ###########
+
+select *, date_format (D_O_B,"%D-%M-%Y") as Tarik from Customers;
+
+SELECT Customer_id, Month(D_O_B) AS BirthMonth FROM customers;
+
+
+#DateDifference between the two dates
+SELECT Customer_ID,
+DATEDIFF(CURDATE(),D_O_B) AS Days FROM customers;
+
+SELECT First_Name, D_O_B, IF(YEAR(D_O_B) <= 2007,'Adult','Young') AS Category FROM Customers;
+
+SELECT First_Name, IFNULL(Phone, 'Not Available') AS PhoneNumber FROM Customers;
+
+#date_add interval 
+Select *, date_add(D_O_B,interval 5 day) from customers;
+
+Select account_type, sum(balance) from accounts
+group by account_type;
+
+Select account_type, sum(balance) from accounts
+group by account_type
+having  sum(balance) > 30000;
